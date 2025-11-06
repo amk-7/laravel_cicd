@@ -26,5 +26,8 @@ jobs:
               with:
                 username: ${{ secrets.DOKER_USERNAME }}
                 password: ${{ secrets.DOKER_TOKEN }}
-            
+            # 5- Pousser l'image sur la registry
+            - name: Push image with new tag
+              run: docker push amk07/laravelcicd:latest
+              
 
