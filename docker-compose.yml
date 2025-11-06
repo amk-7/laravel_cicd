@@ -1,0 +1,23 @@
+# Définir les services app et db
+services:
+  app:
+    build: .  # Créer une image à partir Dockerfile courant
+    image: laravelapp
+    entrypoint: ["/bin/bash", "/project/entrypoint.sh"]
+    restart: unless-stopped
+    ports:
+      - "7000:8000"
+    volumes:
+      - ./app:/project 
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    env_file:
+        - .db.env
+volumes:
+  dbdata:
+
+
