@@ -14,11 +14,11 @@ jobs:
 
             # 2 - Exécuter les tests
             - name: Run test
-              run: php artisan test
+              run: cd app && composer install && cp .env.example .env && php artisan key:gen && php artisan test
             
             # 3- Construire l'image
             - name: Build app image
-              run: docker build -t amk07/laravelcicd:test2 .
+              run: docker build -t amk07/laravelcicd:jpl .
             
             # 4- Se connecter à docker hub
             - name: Login to docker hub
@@ -28,6 +28,6 @@ jobs:
                 password: ${{ secrets.DOKER_TOKEN }}
             # 5- Pousser l'image sur la registry
             - name: Push image with new tag
-              run: docker push amk07/laravelcicd:test2
+              run: docker push amk07/laravelcicd:jpl
               
 
